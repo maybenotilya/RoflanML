@@ -40,15 +40,15 @@ type is_rec =
 [@@deriving show { with_path = false }]
 
 type type_id =
-  | TUnknown (** Argument without mentioned type *)
   | TInt (** Type int *)
   | TBool (** Type bool *)
   | TUnit (** Type unit () *)
   | TFun of type_id * type_id (** Function type t1 -> t2 *)
   | TList of type_id (** List type t list *)
+  | TTuple of type_id list (** Tuple type (t1, t2, ..., tn) *)
 [@@deriving show { with_path = false }]
 
-type typed_arg = id * type_id [@@deriving show { with_path = false }]
+type typed_arg = id * type_id option [@@deriving show { with_path = false }]
 
 type expr =
   | EConst of const (** Consts *)
